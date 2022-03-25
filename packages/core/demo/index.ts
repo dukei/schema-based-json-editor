@@ -4,6 +4,74 @@ import * as common from '../dist/'
  * @public
  */
 export let schema: common.Schema = {
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Answer"
+  },
+  "definitions": {
+    "Answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "questions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "locales": {
+          type: undefined,
+          "$ref": "#/definitions/Locales"
+        }
+      },
+      "required": [
+        "locales",
+        "questions"
+      ],
+      "title": "Answer"
+    },
+    "Locales": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ru": {
+          "$ref": "#/definitions/AnswerLocal"
+        },
+        "uk": {
+          "$ref": "#/definitions/AnswerLocal"
+        }
+      },
+      "required": [
+        "ru",
+        "uk"
+      ],
+      "title": "Locales"
+    },
+    "AnswerLocal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "answer": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "answer",
+        "title"
+      ],
+      "title": "Localized answer"
+    }
+  }
+}
+
+/**
+ * @public
+ */
+export const schemaDefault: common.Schema = {
   type: 'object',
   title: 'GUI:',
   description: 'a description example',

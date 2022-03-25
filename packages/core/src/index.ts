@@ -48,7 +48,7 @@ type IsUndefinedCondition = [string, 'isUndefined']
  * @public
  */
 export type AnySchema = CommonSchema & {
-  type: undefined;
+  type?: undefined;
 }
 
 /**
@@ -61,6 +61,7 @@ export type ObjectSchema = CommonSchema & {
   maxProperties?: number;
   minProperties?: number;
   collapsed?: boolean;
+  additionalProperties?: boolean;
 }
 
 /**
@@ -1058,9 +1059,13 @@ export function filterArray(value: ValueType, index: number, schema: Schema, fil
   }
   if (schema.type === 'object') {
     const title = getTitle(findTitleFromSchema(value as { [name: string]: ValueType }, schema), schema.title)
-    return title.indexOf(filterValue) !== -1
+    if(title.indexOf(filterValue) !== -1)
+      return true;
   }
-  return false
+
+  //Поиск по всему тексту объекта
+  return JSON.stringify(value).replace(/\s+/g, ' ').indexOf(filterValue) !== -1;
+  //return false
 }
 
 /**

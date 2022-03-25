@@ -54,8 +54,8 @@ class Main extends React.Component<unknown, unknown> {
             monacoEditor={monaco.editor} />
         </div>
         <div style={{ margin: '10px', width: '30%', position: 'fixed', right: '10px', height: '100%', overflowY: 'scroll' }}>
-          Value:
-          <pre style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
+          Value <button onClick={() => {navigator.clipboard.writeText(document.getElementById("code")!.innerText)}}>Copy</button>:
+          <pre id="code" style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
         </div>
       </div>
     )

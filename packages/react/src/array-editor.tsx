@@ -159,6 +159,11 @@ export class ArrayEditor extends React.Component<Props, State> {
         <Description theme={this.props.theme} message={this.props.schema.description} />
         {element}
         <Description theme={this.props.theme} message={this.errorMessage} />
+        <Icon valid={this.hasAddButton}
+              onClick={this.addItem}
+              text={this.props.icon.add}
+              theme={this.props.theme}
+              icon={this.props.icon} />
       </div>
     )
   }
