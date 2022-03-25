@@ -3,7 +3,7 @@ import * as common from '../dist/'
 /**
  * @public
  */
-export let schema: common.Schema = {
+export const schema: common.Schema = {
   "$schema": "http://json-schema.org/draft-07/schema",
   "type": "array",
   "items": {
@@ -56,7 +56,8 @@ export let schema: common.Schema = {
           "type": "string"
         },
         "answer": {
-          "type": "string"
+          "type": "string",
+          "format": "textarea"
         }
       },
       "required": [
@@ -532,7 +533,7 @@ const propertiesString = localStorage.getItem('json-editor:properties')
 if (propertiesString) {
   try {
     const properties = JSON.parse(propertiesString)
-    schema = JSON.parse(properties.schema)
+    //schema = JSON.parse(properties.schema)
     initialValue = properties.initialValue
     theme = properties.theme
     icon = properties.icon
@@ -551,7 +552,7 @@ export const propertiesSchema: common.ObjectSchema = {
   properties: {
     schema: {
       type: 'string',
-      format: 'json'
+      format: 'textarea'
     },
     initialValue: {
       type: undefined

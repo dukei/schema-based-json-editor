@@ -38,6 +38,7 @@ class Main extends React.Component<unknown, unknown> {
             locale={this.locale}
             dragula={dragula}
             markdownit={MarkdownIt}
+            readonly={true}
             hljs={hljs}
             monacoEditor={monaco.editor} />
         </div>
@@ -54,7 +55,12 @@ class Main extends React.Component<unknown, unknown> {
             monacoEditor={monaco.editor} />
         </div>
         <div style={{ margin: '10px', width: '30%', position: 'fixed', right: '10px', height: '100%', overflowY: 'scroll' }}>
-          Value <button onClick={() => {navigator.clipboard.writeText(document.getElementById("code")!.innerText)}}>Copy</button>:
+          Value
+          <button onClick={() => {
+            this.propertiesInitialValue.initialValue = JSON.parse(document.getElementById("code")!.innerText);
+            this.updatePropertiesValue(this.propertiesInitialValue, true);
+          }}>Save</button>&nbsp;
+          <button onClick={() => {navigator.clipboard.writeText(document.getElementById("code")!.innerText)}}>Copy</button>:
           <pre id="code" style={{ borderColor: this.isValid ? 'black' : 'red' }}><code dangerouslySetInnerHTML={{ __html: valueHtml }}></code></pre>
         </div>
       </div>
