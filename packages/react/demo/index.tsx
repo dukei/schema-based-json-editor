@@ -73,10 +73,20 @@ class Main extends React.Component<unknown, unknown> {
       console.log(error)
     }
   }
+
+  private static timerIdUpdateValue = 0;
+
   private updateValue = (value: any, isValid: boolean) => {
-    this.initialValue = value
-    this.isValid = isValid
-    this.setState({ initialValue: this.initialValue })
+    if(Main.timerIdUpdateValue)
+      clearTimeout(Main.timerIdUpdateValue);
+
+    Main.timerIdUpdateValue = window.setTimeout(() => {
+      this.initialValue = value
+      this.isValid = isValid
+      this.setState({ initialValue: this.initialValue });
+      Main.timerIdUpdateValue = 0;
+    }, 1000)
+
   }
 }
 
