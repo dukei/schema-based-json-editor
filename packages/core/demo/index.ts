@@ -14,6 +14,12 @@ export const schema: common.Schema = {
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "theme": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
         "questions": {
           "type": "array",
           "items": {
@@ -26,6 +32,8 @@ export const schema: common.Schema = {
         }
       },
       "required": [
+        "theme",
+        "country",
         "locales",
         "questions"
       ],
